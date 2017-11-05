@@ -1,6 +1,16 @@
-from pyapp.calc import calc as real_calc
 import sys
 import zerorpc
+import logging
+
+from pyapp.calc import calc as real_calc
+
+logging.basicConfig(
+    filename='calc.log',
+    filemode='w',
+    level=logging.INFO,
+    format='%(asctime)s %(message)s',
+)
+logger = logging.getLogger('__name__')
 
 
 class CalcApi:
@@ -18,13 +28,22 @@ class CalcApi:
 def main():
     port = 4242
     addr = 'tcp://127.0.0.1:{port}'.format(port=port)
-    s = zerorpc.Server(CalcApi())
-    s.bind(addr)
-    print("Starting to listen on {address}".format(address=addr))
-    try:
-        s.run()
-    except KeyboardInterrupt:
-        print("Terminated by KeyboardInterrupt.")
+    client = zerorpc.Client()
+    client.connect(addr)
+    print("Connecting on {address}".format(address=addr))
+    ca = CalcApi()
+    answer = ""
+    while True:
+        try:
+            formula = client.update(answer)
+            answer = ca.calc(formula)
+            logger.info("{} => {}".format(formula, answer))
+        except KeyboardInterrupt:
+            logger.info("Terminated by KeyboardInterrupt.")
+            break
+        except Exception as exc:
+            logger.exception(exc)
+            break
     
 
 if __name__ == '__main__':

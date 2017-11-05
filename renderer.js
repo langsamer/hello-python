@@ -2,24 +2,26 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 
-// console.log("entering renderer.js")
+console.log("entering renderer.js")
 const zerorpc = require("zerorpc")
 // console.log("required zerorpc")
-let client = new zerorpc.Client()
-// console.log("instantiated zerorpc client")
-client.connect("tcp://127.0.0.1:4242")
-// console.log("connected to zerorpc client")
 
 let formula = document.querySelector('#formula')
 let result = document.querySelector('#result')
+let resultText = document.createTextNode('')
+result.appendChild(resultText)
+let initialized = false
 
-formula.addEventListener('input', function() {
-    client.invoke("calc", formula.value, function(error, res) {
-	if(error) {
-	    console.error(error)
-	} else {
-	    result.textContent = res
-	}
-    })
+function update_func(result, reply) {
+    console.log("update:"+result)
+    resultText.textContent = result
+    reply(null, formula.value)
+}
+
+let server = new zerorpc.Server({
+    update: update_func
 })
-formula.dispatchEvent(new Event('input'))
+console.log("instantiated zerorpc server")
+
+server.bind("tcp://0.0.0.0:4242")
+console.log("bound to port 4242")
