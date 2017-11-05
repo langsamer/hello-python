@@ -1,27 +1,34 @@
 {
-  "name": "hello-python",
-  "version": "0.1.0",
-  "description": "first try at using electron from python",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/langsamer/hello-python.git"
-  },
-  "keywords": [
-    "electron",
-    "python"
-  ],
-  "author": "@langsamer",
-  "license": "BSD-2-Clause",
-  "bugs": {
-    "url": "https://github.com/langsamer/hello-python/issues"
-  },
-  "homepage": "https://github.com/langsamer/hello-python#readme",
-  "dependencies": {
-    "electron": "^1.7.9",
-    "zerorpc": "^0.9.7"
-  }
+    "name": "hello-python",
+    "version": "0.1.0",
+    "description": "first try at using electron from python",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/langsamer/hello-python.git"
+    },
+    "keywords": [
+        "electron",
+        "python"
+    ],
+    "author": {
+	"name" : "Malte Plath",
+	"email" : "palomar@gmx.de",
+        "url" : "https://github.com/langsamer"
+    },
+    "license": "BSD-2-Clause",
+    "bugs": {
+        "url": "https://github.com/langsamer/hello-python/issues"
+    },
+    "homepage": "https://github.com/langsamer/hello-python#readme",
+    "dependencies": {
+        "zerorpc": "^0.9.7"
+    },
+    "devDependencies": {
+        "electron": "^1.7.9",
+        "electron-packager": "electron-packager"
+    }
 }
