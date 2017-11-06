@@ -12,8 +12,12 @@ client.connect("tcp://127.0.0.1:4242")
 
 let formula = document.querySelector('#formula')
 let result = document.querySelector('#result')
+let form = document.querySelector('form')
+form.addEventListener('submit', submitForm)
 
-formula.addEventListener('input', function() {
+function submitForm(e) {
+    e.preventDefault()
+    const user_input = formula.value
     client.invoke("calc", formula.value, function(error, res) {
 	if(error) {
 	    console.error(error)
@@ -21,5 +25,4 @@ formula.addEventListener('input', function() {
 	    result.textContent = res
 	}
     })
-})
-formula.dispatchEvent(new Event('input'))
+}

@@ -1,4 +1,5 @@
 const electron = require('electron')
+//var argv = electron.remote.process.argv
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const path = require('path')
