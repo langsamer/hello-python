@@ -1,7 +1,8 @@
-from pyapp.calc import calc as real_calc
-import sys
-import zerorpc
 import logging
+
+import zerorpc
+
+from pyapp.calc import calc as real_calc
 
 logging.basicConfig(
     filename='calc.log',
